@@ -101,7 +101,7 @@ def embedding_db():
 # embeddings =OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY_5)
 # doc_split=doc_preprocessing()
 # doc_db = Pinecone.from_documents(documents=doc_split, embedding=embeddings, index_name='test')
-# embedding_db()
+embedding_db()
 
 
 llm = ChatOpenAI(model_name="gpt-3.5-turbo", openai_api_key=OPENAI_API_KEY_5)
