@@ -69,20 +69,33 @@ def ensure_pinecone_index():
 index = ensure_pinecone_index()
 
 
-def doc_preprocessing():
-    loader = PyPDFDirectoryLoader(    #load pdf documents
-        path='/content/drive/MyDrive/ST-Testing/Diabetes', 
-        glob='**/*.pdf'    # only the PDFs
-        # show_progress=True
-    )
-    docs = loader.load()
-    text_splitter = CharacterTextSplitter(  #splitting loaded documents
-        chunk_size=1000, 
-        chunk_overlap=0
-    )
-    docs_split = text_splitter.split_documents(docs)
-    return docs_split
+# def doc_preprocessing():
+#     loader = PyPDFDirectoryLoader(    #load pdf documents
+#         path='/content/drive/MyDrive/ST-Testing/Diabetes', 
+#         glob='**/*.pdf'    # only the PDFs
+#         # show_progress=True
+#     )
+#     docs = loader.load()
+#     text_splitter = CharacterTextSplitter(  #splitting loaded documents
+#         chunk_size=1000, 
+#         chunk_overlap=0
+#     )
+#     docs_split = text_splitter.split_documents(docs)
+#     return docs_split
 
+
+def doc_preprocessing():
+    loader1 = PyPDFDirectoryLoader(path='Diabetes', glob='**/*.pdf')
+    loader2 = PyPDFDirectoryLoader(path='.', glob='Heart_Diseases.pdf')
+    
+    docs1 = loader1.load()
+    docs2 = loader2.load()
+    
+    all_docs = docs1 + docs2
+    
+    text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
+    docs_split = text_splitter.split_documents(all_docs)
+    return docs_split
 
 
 from langchain_community.vectorstores.pinecone import Pinecone
@@ -101,7 +114,7 @@ def embedding_db():
 # embeddings =OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY_5)
 # doc_split=doc_preprocessing()
 # doc_db = Pinecone.from_documents(documents=doc_split, embedding=embeddings, index_name='test')
-embedding_db()
+# embedding_db()
 
 
 llm = ChatOpenAI(model_name="gpt-3.5-turbo", openai_api_key=OPENAI_API_KEY_5)
