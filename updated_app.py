@@ -224,7 +224,7 @@ def main():
         </style>
         """, unsafe_allow_html=True)
     
-    st.title('Time Series Repository :clock1: :chart_with_upwards_trend:')
+    st.title('Question and Answering System :clock1: :chart_with_upwards_trend:')
     
     st.markdown(' ### Embedded with OpenAI  :keyboard:', unsafe_allow_html=True)
 
