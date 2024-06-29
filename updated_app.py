@@ -102,7 +102,7 @@ from langchain_community.vectorstores.pinecone import Pinecone
 # import pinecone
 def embedding_db():
     os.environ["PINECONE_API_KEY"] = peopa1
-    # embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2", model_kwargs={"device": "cpu"})
+   
     embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY_5)
     Pinecone.from_existing_index(  index_name='test', embedding=embeddings)
     docs_split = doc_preprocessing()
