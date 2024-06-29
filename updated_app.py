@@ -26,7 +26,7 @@ from dotenv import load_dotenv
 
 # PINECONE_API_KEY_3 = os.getenv('PINECONE_API_KEY_3')
 # PINECONE_ENV_3 = os.getenv('PINECONE_ENV_3')
-# pe5 = os.getenv('pe5')
+# peopa1 = os.getenv('peopa1')
 
 
 # OPENAI_API_KEY_5 = os.getenv('OPENAI_API_KEY_5')
@@ -37,7 +37,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-pe5 = os.getenv('pe5')
+peopa1 = os.getenv('peopa1')
 # PINECONE_ENV_3 = os.getenv('PINECONE_ENV_3')
 OPENAI_API_KEY_5 = os.getenv('OPENAI_API_KEY_5')
 
@@ -52,7 +52,7 @@ def ensure_pinecone_index():
     cloud = "aws"
     region = "us-east-1"
 
-    pc = Pinecone(api_key=pe5)
+    pc = Pinecone(api_key=peopa1)
     if index_name not in pc.list_indexes().names():
         pc.create_index(
             name=index_name,
@@ -101,7 +101,7 @@ def doc_preprocessing():
 from langchain_community.vectorstores.pinecone import Pinecone
 # import pinecone
 def embedding_db():
-    os.environ["PINECONE_API_KEY"] = pe5
+    os.environ["PINECONE_API_KEY"] = peopa1
     # embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2", model_kwargs={"device": "cpu"})
     embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY_5)
     Pinecone.from_existing_index(  index_name='test', embedding=embeddings)
@@ -135,7 +135,7 @@ from langchain.chains.question_answering import load_qa_chain
 chain = load_qa_chain(llm)
 
 
-os.environ["PINECONE_API_KEY"] = pe5
+os.environ["PINECONE_API_KEY"] = peopa1
 embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY_5)
 
 doc_split=doc_preprocessing()
@@ -150,21 +150,6 @@ def qa_vector_store(chain, question):
   outputs = response["output_text"]
   return outputs
 
-
-
-# # Streamlit UI
-# def main():
-#     st.title("Time Series Repository")
-
-#     text_input = st.text_input("Ask your query...") 
-#     if st.button("Ask Query"):
-#         if len(text_input) > 0:
-#             st.info("Your Query: " + text_input)
-#             answer = qa_vector_store(chain, text_input)
-#             st.success(answer)
-
-# if __name__ == "__main__":
-#     main()
 
 
 
