@@ -26,7 +26,7 @@ from dotenv import load_dotenv
 
 # PINECONE_API_KEY_3 = os.getenv('PINECONE_API_KEY_3')
 # PINECONE_ENV_3 = os.getenv('PINECONE_ENV_3')
-# peopa1 = os.getenv('peopa1')
+# pe5 = os.getenv('pe5')
 
 
 # OPENAI_API_KEY_5 = os.getenv('OPENAI_API_KEY_5')
@@ -37,7 +37,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-peopa1 = os.getenv('peopa1')
+pe5 = os.getenv('pe5')
 # PINECONE_ENV_3 = os.getenv('PINECONE_ENV_3')
 OPENAI_API_KEY_5 = os.getenv('OPENAI_API_KEY_5')
 
@@ -52,7 +52,7 @@ def ensure_pinecone_index():
     cloud = "aws"
     region = "us-east-1"
 
-    pc = Pinecone(api_key=peopa1)
+    pc = Pinecone(api_key=pe5)
     if index_name not in pc.list_indexes().names():
         pc.create_index(
             name=index_name,
@@ -101,7 +101,7 @@ def doc_preprocessing():
 from langchain_community.vectorstores.pinecone import Pinecone
 # import pinecone
 def embedding_db():
-    os.environ["PINECONE_API_KEY"] = peopa1
+    os.environ["PINECONE_API_KEY"] = pe5
    
     embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY_5)
     Pinecone.from_existing_index(  index_name='test', embedding=embeddings)
@@ -135,7 +135,7 @@ from langchain.chains.question_answering import load_qa_chain
 chain = load_qa_chain(llm)
 
 
-os.environ["PINECONE_API_KEY"] = peopa1
+os.environ["PINECONE_API_KEY"] = pe5
 embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY_5)
 
 doc_split=doc_preprocessing()
